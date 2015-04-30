@@ -19,8 +19,6 @@ case "$1" in
             rm -f ${DOCKER_POOL_CONF}
         fi
 
-	apt-get remove docker
-
         service php5-fpm reload
         service nginx reload
     ;;
