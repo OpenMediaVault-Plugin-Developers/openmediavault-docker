@@ -15,11 +15,6 @@ case "$1" in
             rm -f ${DOCKER_SITE_CONF}
         fi
 
-        if [ -e "${DOCKER_POOL_CONF}" ]; then
-            rm -f ${DOCKER_POOL_CONF}
-        fi
-
-        service php5-fpm reload
         service nginx reload
     ;;
 

@@ -77,9 +77,6 @@ case "$1" in
 
 	docker run -d -p 9200:9200 -v /var/run/docker.sock:/docker.sock --name dockerui abh1nav/dockerui:latest -e="/docker.sock"
 
-        omv-mkconf php5fpm
-        service php5-fpm reload
-
         omv-mkconf nginx
         service nginx reload
 
