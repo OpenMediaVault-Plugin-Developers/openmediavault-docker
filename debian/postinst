@@ -38,7 +38,7 @@ echo_docker_as_nonroot() {
 	cat <<-EOF
 
 	If you would like to use Docker as a non-root user, you should now consider
-	adding your user to the "docker" group with something like:
+	adding your user to the "docker" group in the OMV web interface or with something like:
 
 	  sudo usermod -aG docker $your_user
 
@@ -73,11 +73,9 @@ case "$1" in
 	fi
 	echo_docker_as_nonroot
 
-	mv /etc/apt/sources.list.d/docker.list /etc/apt/sources.list.d/docker.list_not_used
-
 	docker pull abh1nav/dockerui:latest
 
-	docker run -d -p 9000:9000 -v /var/run/docker.sock:/docker.sock --name dockerui abh1nav/dockerui:latest -e="/docker.sock"
+	docker run -d -p 9200:9200 -v /var/run/docker.sock:/docker.sock --name dockerui abh1nav/dockerui:latest -e="/docker.sock"
 
         omv-mkconf php5fpm
         service php5-fpm reload
