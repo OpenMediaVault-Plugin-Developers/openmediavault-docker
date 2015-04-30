@@ -5,7 +5,6 @@ set -e
 . /etc/default/openmediavault
 . /usr/share/openmediavault/scripts/helper-functions
 
-DOCKER_POOL_CONF="/etc/php5/fpm/pool.d/openmediavault-docker-site.conf"
 DOCKER_SITE_CONF="/etc/nginx/openmediavault-webgui.d/openmediavault-docker-site.conf"
 
 case "$1" in
@@ -14,9 +13,9 @@ case "$1" in
         if [ -e "${DOCKER_SITE_CONF}" ]; then
             rm -f ${DOCKER_SITE_CONF}
         fi
-	docker stop dockerui
-	docker rm dockerui
-	apt-get remove lxc-docker	
+
+        docker stop dockerui
+        docker rm dockerui
 
         service nginx reload
     ;;
