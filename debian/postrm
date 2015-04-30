@@ -14,6 +14,9 @@ case "$1" in
         if [ -e "${DOCKER_SITE_CONF}" ]; then
             rm -f ${DOCKER_SITE_CONF}
         fi
+	docker stop dockerui
+	docker rm dockerui
+	apt-get remove lxc-docker	
 
         service nginx reload
     ;;

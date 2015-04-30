@@ -28,9 +28,20 @@ fi
 
 cat <<EOF > "${DOCKER_SITE_CONF}"
 location /dockerui/ {
-    proxy_pass  http://localhost:9200;
-    proxy_set_header Host localhost:9200;
-    proxy_redirect default;
+		proxy_pass  http://localhost:9200/;
+                #http 1.1 support...
+                proxy_http_version 1.1;
+                proxy_set_header Connection "";
+                proxy_set_header   Host $host:9200;
+}
+location /dockerapi/ {
+		proxy_pass  http://localhost:9200;
+    		proxy_set_header Host $host:9200;
+   		proxy_redirect default;
+                #http 1.1 support...
+                proxy_http_version 1.1;
+                proxy_set_header Connection "";
+
 }
 EOF
 

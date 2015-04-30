@@ -27,14 +27,7 @@ Ext.define("OMV.module.admin.service.docker.Info", {
         var me = this;
 
         me.html = "<ul>" +
-                    "<li>" + _("Default username:  admin") + "</li>" +
-                    "<li>" + _("Default password:  openmediavault") + "</li>" +
-                  "</ul>" +
-                  "<ul>" +
-                    "<li>" + _("Give the <b>docker</b> user read or read/write privileges to any shared folder to be accessed in docker.") + "</li>" +
-                  "</ul>" +
-                  "<ul>" +
-                    "<li><a href='/docker/' target='_blank'>" + _("Open in a new window") + "</a></li>" +
+                    "<li><a href='/dockerui/' target='_blank'>" + _("Open in a new window") + "</a></li>" +
                   "</ul>";
 
         me.callParent(arguments);
@@ -47,7 +40,7 @@ Ext.define("OMV.module.admin.service.docker.Interface", {
     initComponent : function() {
         var me = this;
 
-        me.html = "<iframe src='/docker/' name='docker' longsec='docker' width='100%' height='100%' />";
+        me.html = "<iframe src='/dockerui/' name='docker' longsec='docker' width='100%' height='100%' />";
         me.callParent(arguments);
     }
 });
