@@ -18,7 +18,7 @@ case "$1" in
         if [ -e "${DOCKER_POOL_CONF}" ]; then
             rm -f ${DOCKER_POOL_CONF}
         fi
-			
+
 	apt-get remove docker
 
         service php5-fpm reload

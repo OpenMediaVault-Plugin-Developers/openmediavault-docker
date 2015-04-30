@@ -1,6 +1,6 @@
 Source: openmediavault-docker
 Section: net
-XB-Plugin-Section: services
+XB-Plugin-Section: virtualization
 Priority: optional
 Maintainer: OpenMediaVault Plugin Developers <plugins@omv-extras.org>
 Build-Depends: debhelper (>> 9 )
@@ -9,6 +9,6 @@ Homepage: http://docker.io/
 
 Package: openmediavault-docker
 Architecture: all
-Depends: ${misc:Depends}, openmediavault (>= 1.0.7), unzip, curl, lxc-docker
+Depends: ${misc:Depends}, openmediavault (>= 1.17), unzip, curl, lxc-docker
 Description: OpenMediaVault docker plugin
  installs docker and adds link in the OpenMediaVault web interface.

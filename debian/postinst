@@ -60,26 +60,25 @@ case "$1" in
         fi
 
         echo "Installing docker..."
-				
-				
+
+
 	export DEBIAN_FRONTEND=noninteractive
 
 
 	if command_exists docker && [ -e /var/run/docker.sock ]; then
-		(
-			set -x
-			docker version
-		) || true
+            (
+                set -x
+                docker version
+            ) || true
 	fi
 	echo_docker_as_nonroot
-	
+
 	mv /etc/apt/sources.list.d/docker.list /etc/apt/sources.list.d/docker.list_not_used
-	
+
 	docker pull abh1nav/dockerui:latest
-	
+
 	docker run -d -p 9000:9000 -v /var/run/docker.sock:/docker.sock --name dockerui abh1nav/dockerui:latest -e="/docker.sock"
 
-                
         omv-mkconf php5fpm
         service php5-fpm reload
 
