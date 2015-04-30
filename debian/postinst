@@ -47,8 +47,6 @@ echo_docker_as_nonroot() {
 	EOF
 }
 
-
-
 case "$1" in
     configure)
 
@@ -72,10 +70,10 @@ case "$1" in
             ) || true
 	fi
 	echo_docker_as_nonroot
+	
+	docker pull dockerui/dockerui:latest
 
-	docker pull abh1nav/dockerui:latest
-
-	docker run -d -p 9200:9000 -v /var/run/docker.sock:/docker.sock --name dockerui abh1nav/dockerui:latest -e="/docker.sock"
+	docker run --restart=always -d -p 9200:9000 -v /var/run/docker.sock:/docker.sock --name dockerui abh1nav/dockerui:latest -e="/docker.sock"
 
         omv-mkconf nginx
         service nginx reload
