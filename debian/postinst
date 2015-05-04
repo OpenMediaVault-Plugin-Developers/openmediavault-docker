@@ -73,7 +73,7 @@ case "$1" in
 	
 	docker pull dockerui/dockerui:latest
 
-	docker run --restart=always -d -p 9200:9000 -v /var/run/docker.sock:/docker.sock --name dockerui abh1nav/dockerui:latest -e="/docker.sock"
+	docker run --restart=always -d -p 9200:9000 -v /var/run/docker.sock:/docker.sock --name dockerui dockerui/dockerui:latest -e="/docker.sock"
 
         omv-mkconf nginx
         service nginx reload
