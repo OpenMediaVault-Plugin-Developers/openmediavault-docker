@@ -14,8 +14,10 @@ case "$1" in
             rm -f ${DOCKER_SITE_CONF}
         fi
 
-        docker stop dockerui
-        docker rm dockerui
+	docker stop dockerui
+	docker rm dockerui
+	docker rmi dockerui/dockerui
+	apt-get remove lxc-docker
 
         service nginx reload
     ;;
