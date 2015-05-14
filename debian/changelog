@@ -1,5 +1,14 @@
+openmediavault-docker (0.2) stable; urgency=low
+
+  * Fix plugin removal
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 14 May 2015 06:13:47 -0500
+
 openmediavault-docker (0.1) stable; urgency=low
 
+  [ Slobberbone ]
   * initial release
   
+  [ OpenMediaVault Plugin Developers ]
+
  -- Slobberbone <slobberbone4884@gmail.com>  Sat, 25 Apr 2015 10:18:59 -0500
