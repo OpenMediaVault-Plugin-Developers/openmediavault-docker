@@ -40,8 +40,6 @@ case "$1" in
 		echo "$x container is stopped but not removed"
 	done
 
-	apt-get remove lxc-docker
-
         service nginx reload
     ;;
 
