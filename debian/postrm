@@ -1,5 +1,24 @@
 #!/bin/sh
 
+stopContainer() {
+
+	RUNNING=$(docker inspect --format="{{.State.Running}}" $CONTAINER 2> /dev/null)
+	if [ $? -eq 1 ] ; then
+		echo "$CONTAINER does not exist."
+	fi
+	if [ "$RUNNING" == "true" ] ; then
+		echo "$CONTAINER is running. We stop it"
+		docker stop $CONTAINER
+	fi
+
+#	GHOST=$(docker inspect --format="{{.State.Ghost}}" $CONTAINER)
+#echo "$GHOST"
+#	if [ "$GHOST" == "true" ]; then
+#		echo "$CONTAINER has been ghosted. We kill it"
+#		docker kill $CONTAINER
+#	fi
+}
+
 set -e
 
 . /etc/default/openmediavault
@@ -14,9 +33,14 @@ case "$1" in
             rm -f ${DOCKER_SITE_CONF}
         fi
 
-        docker stop dockerui
-        docker rm dockerui
-        docker rmi dockerui/dockerui
+	for x in "$(docker ps -q | xargs docker inspect --format '{{.Name}}' $1)"; do 
+		echo "$x container will be treated"
+		CONTAINER=$(echo "$x" | sed -e "s/\///g")
+		stopContainer
+		echo "$x container is stopped but not removed"
+	done
+
+	apt-get remove lxc-docker
 
         service nginx reload
     ;;
