@@ -61,7 +61,8 @@ case "$1" in
 
 
 	export DEBIAN_FRONTEND=noninteractive
-
+	
+	DOCKER_EXIST="false"
 
 	if command_exists docker && [ -e /var/run/docker.sock ]; then
             (
@@ -70,11 +71,26 @@ case "$1" in
             ) || true
 	fi
 	echo_docker_as_nonroot
+
+
+	for x in "$(docker ps -q | xargs docker inspect --format '{{.Name}}' $1)"; do 
+		CONTAINER=$(echo "$x" | sed -e "s/\///g")
+		if [ "$CONTAINER" == "dockerui" ]
+		then
+			echo "$x container existing"
+		 	DOCKER_EXIST="true"
+		fi
+	done
 	
-	docker pull dockerui/dockerui:latest
-
-	docker run --restart=always -d -p 9200:9000 -v /var/run/docker.sock:/docker.sock --name dockerui dockerui/dockerui:latest -e="/docker.sock"
-
+	if [ "$DOCKER_EXIST" == "false" ]
+	then
+		echo "DockerUI container not exist, create it"
+	 	docker pull dockerui/dockerui:latest
+		docker run --restart=always -d -p 9200:9000 -v /var/run/docker.sock:/docker.sock --name dockerui dockerui/dockerui:latest -e="/docker.sock"
+	else  
+		echo "DockerUI container already exist"
+	fi
+	
         omv-mkconf nginx
         service nginx reload
 
