@@ -9,6 +9,7 @@ Homepage: http://docker.io/
 
 Package: openmediavault-docker
 Architecture: all
-Depends: ${misc:Depends}, openmediavault (>= 1.17), unzip, curl, apparmor, apt-transport-https, ca-certificates, lxc-docker
+Depends: ${misc:Depends}, openmediavault (>= 1.17), unzip, curl, apparmor,
+ apt-transport-https, ca-certificates, docker-engine
 Description: OpenMediaVault docker plugin
  installs docker and adds link in the OpenMediaVault web interface.
